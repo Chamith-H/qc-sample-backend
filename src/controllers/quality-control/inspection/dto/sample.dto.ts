@@ -14,5 +14,8 @@ export class SampleDto {
   round: number;
 
   @IsNotEmpty()
+  columnNames: any[];
+
+  @IsNotEmpty()
   parameterValues: any;
 }

@@ -15,6 +15,9 @@ export class QualityChecking {
   sampleNumber: number;
 
   @Prop()
+  sampleName: string;
+
+  @Prop()
   stageName: string;
 
   @Prop()
@@ -22,7 +25,7 @@ export class QualityChecking {
 
   @Prop()
   itemCode: string;
-//ok
+  //ok
   @Prop()
   round: number;
 

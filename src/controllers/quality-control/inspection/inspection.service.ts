@@ -150,7 +150,7 @@ export class InspectionService {
         for (let j = 1; j <= quotationCount; j++) {
           for (let i = 1; i <= Number(sampleCount); i++) {
             samples.push({
-              name: `${j}${this.counterFetcher(j)} ${propotion} qty - Sample${i}`,
+              name: `${j}${this.counterFetcher(j)} ${propotion} qty - Sample ${i}`,
               colValue: `sample_${j}${i}`,
             });
             sampleValues.push({ [`sample_${j}${i}`]: '' });
@@ -164,7 +164,7 @@ export class InspectionService {
         for (let j = 0; j < filteredSamples.length; j++) {
           for (let i = 1; i <= Number(filteredSamples[j].count); i++) {
             samples.push({
-              name: `${filteredSamples[j].min} to ${filteredSamples[j].max} qty - Sample${i}`,
+              name: `${filteredSamples[j].min} to ${filteredSamples[j].max} qty - Sample ${i}`,
               colValue: `sample_${j}${i}`,
             });
             sampleValues.push({ [`sample_${j}${i}`]: '' });
@@ -198,6 +198,7 @@ export class InspectionService {
       const sample = {
         sampleId: obs._id.toString(),
         sampleName: obs.name,
+        sampleDefinition: obs.sampleName,
         sampleIndex: obs.sampleNumber,
         observedValue: obs.observedValue,
       };
@@ -267,6 +268,8 @@ export class InspectionService {
 
   //!--> Create Samples
   async createSamples(dto: SampleDto, userId: string) {
+    const columnNames = dto.columnNames;
+
     const currentDate = await this.dateCreaterService.getTodayDate();
 
     const paramValueMapper = await Promise.all(
@@ -287,9 +290,14 @@ export class InspectionService {
 
         const sampleMapper = await Promise.all(
           mappedSampler.map(async (s_data: any) => {
+            const sampleDefinitionObj = columnNames.find(
+              (c_name: any) => c_name.colValue === s_data.key,
+            );
+
             const newSample: QualityChecking = {
               name: s_data.key,
               sampleNumber: parseInt(s_data.key.replace('sample_', '')),
+              sampleName: sampleDefinitionObj.name,
               stageName: dto.stage,
               docNum: dto.docNum,
               itemCode: dto.itemCode,
