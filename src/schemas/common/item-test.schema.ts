@@ -10,6 +10,9 @@ export class ItemTest {
 
   @Prop()
   ItemCode: string;
+
+  @Prop()
+  Configured: boolean;
 }
 
 export const ItemTestSchema = SchemaFactory.createForClass(ItemTest);

@@ -20,12 +20,6 @@ import { UpdateParameterDto } from './dto/update-parameter.dto';
 export class StageController {
   constructor(private stageService: StageService) {}
 
-  //!--> Get items
-  @Get('items')
-  async getItems() {
-    return await this.stageService.getItems();
-  }
-
   //!--> Create item parameter
   @Post('create')
   async createItemParameter(@Body() dto: ItemParameterDto) {

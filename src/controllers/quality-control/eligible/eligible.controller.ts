@@ -21,6 +21,15 @@ export class EligibleController {
   }
 
   @HttpCode(200)
+  @Post('not-configured-qc-items')
+  async getNotConfiguredItemData(
+    @Pagination() pagination: PaginationStructure,
+    @FilterObject() dto: EligibleItemDto,
+  ) {
+    return await this.eligibleService.getNotConfiguredItems(dto, pagination);
+  }
+
+  @HttpCode(200)
   @Post('qc-warehouses')
   async getWarehouseData(
     @Pagination() pagination: PaginationStructure,

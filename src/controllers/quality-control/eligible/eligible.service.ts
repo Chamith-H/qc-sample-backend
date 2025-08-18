@@ -62,6 +62,40 @@ export class EligibleService {
     return await this.paginationService.render_toPAGE(currentPage);
   }
 
+  async getNotConfiguredItems(
+    dto: EligibleItemDto,
+    pagination: PaginationStructure,
+  ) {
+    if (dto.ItemCode) {
+      const regex = new RegExp(dto.ItemCode, 'i');
+      dto.ItemCode = regex;
+    }
+
+    if (dto.ItemName) {
+      const regex = new RegExp(dto.ItemName, 'i');
+      dto.ItemName = regex;
+    }
+
+    // DB data filtering query
+    const list = await this.itemTestModel
+      .find({ ...dto, Configured: false })
+      .skip(pagination.offset)
+      .limit(pagination.limit)
+      .sort({ number: -1 });
+
+    //Pass to get pagination
+    const currentPage: TablePaginationInterface = {
+      data: list,
+      model: this.itemTestModel,
+      query: { ...dto, Configured: false },
+      currentPage: pagination.page,
+      dataLimit: pagination.limit,
+    };
+
+    //-->
+    return await this.paginationService.render_toPAGE(currentPage);
+  }
+
   async getWarehouses(
     dto: EligibleWarehouseDto,
     pagination: PaginationStructure,

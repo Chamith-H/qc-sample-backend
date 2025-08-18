@@ -23,52 +23,13 @@ import {
   QualityChecking,
   QualityCheckingDocument,
 } from 'src/schemas/quality-control/inspection/quality-checking.schema';
+import {
+  ItemTest,
+  ItemTestDocument,
+} from 'src/schemas/common/item-test.schema';
 
 @Injectable()
 export class StageService {
-  items = [
-    {
-      ItemCode: 'AI-SHF-001',
-      ItemName: 'Item 1',
-    },
-    {
-      ItemCode: 'AI-SHF-002',
-      ItemName: 'Item 2',
-    },
-    {
-      ItemCode: 'AI-SHF-003',
-      ItemName: 'Item 3',
-    },
-    {
-      ItemCode: 'AI-SHF-004',
-      ItemName: 'Item 4',
-    },
-    {
-      ItemCode: 'AI-SHF-005',
-      ItemName: 'Item 5',
-    },
-    {
-      ItemCode: 'AI-SHF-006',
-      ItemName: 'Item 6',
-    },
-    {
-      ItemCode: 'AI-SHF-007',
-      ItemName: 'Item 7',
-    },
-    {
-      ItemCode: 'AI-SHF-008',
-      ItemName: 'Item 8',
-    },
-    {
-      ItemCode: 'AI-SHF-009',
-      ItemName: 'Item 9',
-    },
-    {
-      ItemCode: 'AI-SHF-010',
-      ItemName: 'Item 10',
-    },
-  ];
-
   constructor(
     @InjectModel(Stage.name)
     private readonly stageModel: Model<StageDocument>,
@@ -76,17 +37,11 @@ export class StageService {
     private readonly stageHeadModel: Model<StageHeadDocument>,
     @InjectModel(QualityChecking.name)
     private readonly qualityCheckingModel: Model<QualityCheckingDocument>,
+    @InjectModel(ItemTest.name)
+    private readonly itemTestModel: Model<ItemTestDocument>,
 
-    private readonly uniqueCodeGenetatorService: UniqueCodeGeneratorService,
-    private readonly dateCreaterService: UtcDateGenerator,
     private readonly paginationService: PaginationService,
-    private readonly checkUniquenessService: CheckUniquenessService,
   ) {}
-
-  //!--> Get stage items
-  async getItems() {
-    return await this.items;
-  }
 
   //!--> Create Item parameter
   async createItemParameter(dto: ItemParameterDto) {
@@ -121,7 +76,16 @@ export class StageService {
       );
 
       if (parameterMapper) {
-        return { message: 'QC parameter relation created successfully!' };
+        const mainUpdater = await this.itemTestModel.updateOne(
+          {
+            ItemCode: dto.itemCode,
+          },
+          { $set: { Configured: true } },
+        );
+
+        if (mainUpdater) {
+          return { message: 'QC parameter relation created successfully!' };
+        }
       }
     }
   }
