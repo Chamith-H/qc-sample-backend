@@ -138,7 +138,13 @@ export class StageService {
   async updateParameters(dto: UpdateParameterDto) {
     const headUpdater = await this.stageHeadModel.updateOne(
       { _id: dto.headId },
-      { $set: { sampleCount: dto.sampleCount, method: dto.method } },
+      {
+        $set: {
+          method: dto.method,
+          samplingMethod: dto.samplingMethod,
+          samplingLogics: dto.samplingLogics,
+        },
+      },
     );
 
     if (!headUpdater) {

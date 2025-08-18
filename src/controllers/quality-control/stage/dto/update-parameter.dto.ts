@@ -14,7 +14,10 @@ export class UpdateParameterDto {
   method: string;
 
   @IsNotEmpty()
-  sampleCount: string;
+  samplingMethod: string;
+
+  @IsNotEmpty()
+  samplingLogics: any[];
 
   @IsNotEmpty()
   DocumentLines: any[];
