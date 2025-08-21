@@ -71,6 +71,6 @@ export class GatePassController {
 
   @Get('gate-pass-view/:id')
   async getGatePassView(@Param('id') id: string) {
-    return await this.gatePassService.viewGatePass(id);
+    return await this.gatePassService.getSelectedGatePass(id);
   }
 }

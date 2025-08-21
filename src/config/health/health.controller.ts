@@ -9,8 +9,8 @@ import { Public } from '../decorators/public.decorator';
 @Controller('health')
 export class HealthController {
   constructor(
-    private health: HealthCheckService,
-    private http: HttpHealthIndicator,
+    private readonly health: HealthCheckService,
+    private readonly http: HttpHealthIndicator,
   ) {}
 
   @Public()

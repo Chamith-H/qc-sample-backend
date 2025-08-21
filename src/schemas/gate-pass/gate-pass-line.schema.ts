@@ -26,10 +26,10 @@ export class GatePassLine {
   checkedQty: string;
 
   @Prop()
-  firstWeight: String;
+  firstWeight: string;
 
   @Prop()
-  secondWeight: String;
+  secondWeight: string;
 
   @Prop()
   status: string;

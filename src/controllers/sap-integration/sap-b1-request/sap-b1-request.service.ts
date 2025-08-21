@@ -1,9 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { B1ApiService } from '../config/b1-api.service';
-import { DropdownConverterService } from 'src/config/services/dropdown-converter/dropdown-converter.service';
-import { GetRequestStructure } from '../config/interfaces/get-request.interface';
-import { ItemListModel } from './models/item-list.model';
-import { DropdownStructure } from 'src/config/interfaces/drop-down.structure';
 import { PaginationRequestStructure } from '../config/interfaces/pagination-request.interface';
 import { PostRequestStructure } from '../config/interfaces/post-request.interface';
 import { PatchRequestStructure } from '../config/interfaces/patch-request.interface';

@@ -9,7 +9,7 @@ import { PatchRequestStructure } from './interfaces/patch-request.interface';
 
 @Injectable()
 export class B1ApiService {
-  constructor(private b1SessionService: B1SessionService) {}
+  constructor(private readonly b1SessionService: B1SessionService) {}
 
   //!--> @GET()
   //!--> Get request to SAP............................................................|

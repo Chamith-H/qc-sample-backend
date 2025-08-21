@@ -221,13 +221,4 @@ export class GatePassService {
       };
     }
   }
-
-  //!-->
-  async viewGatePass(id: string) {
-    const gatePass = await this.gatePassModel
-      .findOne({ _id: id })
-      .populate({ path: 'createdBy' });
-
-    return gatePass;
-  }
 }

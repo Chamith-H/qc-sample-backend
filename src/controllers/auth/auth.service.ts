@@ -96,7 +96,7 @@ export class AuthService {
 
     //-->
     return {
-      jwtToken: await this.jwtService.sign(payload),
+      jwtToken: this.jwtService.sign(payload),
       userData: JSON.stringify(activeUser),
       accessNumbers: JSON.stringify(permissionNumbers),
     };
@@ -159,7 +159,7 @@ export class AuthService {
     );
 
     // Generate a random OTP code
-    const otp = await generator.generate({
+    const otp = generator.generate({
       length: 6,
       numbers: true,
       symbols: false,
@@ -225,7 +225,7 @@ export class AuthService {
     }
 
     // Generate a random password
-    const password = await generator.generate({
+    const password = generator.generate({
       length: 8,
       numbers: true,
     });

@@ -5,7 +5,7 @@ export const ParsedBody = createParamDecorator(
     const request = ctx.switchToHttp().getRequest();
     const dto = request.body;
 
-    if (dto && dto.values) {
+    if (dto?.values) {
       return JSON.parse(dto.values);
     }
 

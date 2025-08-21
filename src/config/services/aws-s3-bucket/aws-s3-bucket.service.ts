@@ -120,11 +120,11 @@ export class AwsS3BucketService {
 
   //!--> Delete files..................................................................|
   async removeFiles(files: string[]) {
-    if (!files || files.length === 0 || !files[0]) {
+    if (!files || files.length === 0) {
       return true;
     }
 
-    const response = files.forEach((key) => {
+    files.forEach((key) => {
       s3_Bucket.deleteObject(
         {
           Bucket: process.env.AWS_USER,

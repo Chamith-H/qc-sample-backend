@@ -24,7 +24,7 @@ import { SaveDataDto } from './dto/save-data.dto';
 
 @Controller('inspection')
 export class InspectionController {
-  constructor(private inspectionService: InspectionService) {}
+  constructor(private readonly inspectionService: InspectionService) {}
 
   //!--> Get inspection list
   @HttpCode(200)

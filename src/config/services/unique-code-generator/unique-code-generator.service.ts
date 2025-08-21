@@ -14,16 +14,10 @@ export class UniqueCodeGeneratorService {
       ]);
 
       const newRequestNumber = currentReq[0].maxNum + 1;
-      return await this.generate_NewId(
-        newRequestNumber,
-        uniqueCodeModel.prefix,
-      );
+      return this.generate_NewId(newRequestNumber, uniqueCodeModel.prefix);
     } catch (error) {
       const newRequestNumber = 1;
-      return await this.generate_NewId(
-        newRequestNumber,
-        uniqueCodeModel.prefix,
-      );
+      return this.generate_NewId(newRequestNumber, uniqueCodeModel.prefix);
     }
   }
 

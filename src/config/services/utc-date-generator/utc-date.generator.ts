@@ -3,7 +3,7 @@ import * as moment from 'moment';
 export class UtcDateGenerator {
   //!--> Convert date text to UTC
   async convert_singleDate(dateText: string): Promise<Date> {
-    const dateUtc = await moment.utc(dateText).toDate();
+    const dateUtc = moment.utc(dateText).toDate();
     return dateUtc;
   }
 
@@ -17,7 +17,7 @@ export class UtcDateGenerator {
 
   //!--> Get month, date, year
   async getMonthDateYear(date: Date) {
-    const formattedDate = await moment(date);
+    const formattedDate = moment(date);
     return {
       year: formattedDate.year(),
       month: formattedDate.month() + 1,

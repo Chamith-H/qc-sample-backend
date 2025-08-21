@@ -97,7 +97,7 @@ export class UserService {
     await this.checkUniquenessService.compare_forCREATE(empid_checkingObject);
 
     // Generate a random password
-    const password = await generator.generate({
+    const password = generator.generate({
       length: 8,
       numbers: true,
     });
@@ -199,10 +199,6 @@ export class UserService {
     // Get AWS images
     const userData = await Promise.all(
       list.map(async (item) => {
-        // const profileImage = await this.s3BucketService.getSingleFile(
-        //   item.profileImage,
-        // );
-
         return {
           values: item,
           image:
@@ -235,11 +231,6 @@ export class UserService {
     if (!isExist) {
       throw new ConflictException('Cannot find this user!');
     }
-
-    // // Get user profile image
-    // const profileImage = await this.s3BucketService.getSingleFile(
-    //   isExist.profileImage,
-    // );
 
     // Update activated url, instead of key path
     isExist.profileImage =
@@ -323,7 +314,7 @@ export class UserService {
     let profileImageKey: string = isExist?.profileImage;
 
     // When incoming profile image exist, delete current path key
-    if (files && files.images && files.images.length !== 0) {
+    if (files?.images && files.images.length !== 0) {
       // Remove current key paths
       const removed = await this.s3BucketService.removeFiles([
         isExist.profileImage,

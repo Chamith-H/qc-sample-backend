@@ -7,7 +7,7 @@ import {
 
 @Injectable()
 export class RbacRoleGuard implements CanActivate {
-  constructor(private requiredPermission: number) {}
+  constructor(private readonly requiredPermission: number) {}
 
   canActivate(context: ExecutionContext): boolean {
     const request = context.switchToHttp().getRequest();
@@ -17,7 +17,7 @@ export class RbacRoleGuard implements CanActivate {
       return true;
     }
 
-    if (!user || !user.permissions) {
+    if (user?.permissions) {
       throw new NotAcceptableException('Permissions denied!');
     }
 

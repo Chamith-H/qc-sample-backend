@@ -11,7 +11,7 @@ export class DropdownConverterService {
       name: item[objectDefinition.name],
     }));
 
-    return await modifiedStructure;
+    return modifiedStructure;
   }
 
   //!--> Return Name = name + _id structure...........................................|
@@ -24,7 +24,7 @@ export class DropdownConverterService {
       name: item[objectDefinition.name] + ` - (${item[objectDefinition._id]})`,
     }));
 
-    return await modifiedStructure;
+    return modifiedStructure;
   }
 
   //!--> Return Name = _id + name structure...........................................|
@@ -37,6 +37,6 @@ export class DropdownConverterService {
       name: item[objectDefinition._id] + ` - (${item[objectDefinition.name]})`,
     }));
 
-    return await modifiedStructure;
+    return modifiedStructure;
   }
 }

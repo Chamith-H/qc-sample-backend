@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { QcParameterDocument } from '../qc-parameter/qc-parameter.schema';
 
 export type StageHeadDocument = StageHead & Document;
 

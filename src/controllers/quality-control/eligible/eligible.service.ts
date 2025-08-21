@@ -4,7 +4,6 @@ import { Model } from 'mongoose';
 import { PaginationStructure } from 'src/config/interfaces/pagination.structure';
 import { TablePaginationInterface } from 'src/config/services/table-pagination/table-pagination.interface';
 import { PaginationService } from 'src/config/services/table-pagination/table-pagination.service';
-import { FilterItemDto } from 'src/controllers/master-data/item/dto/filter-item.dto';
 import { SapB1RequestService } from 'src/controllers/sap-integration/sap-b1-request/sap-b1-request.service';
 import {
   ItemTest,

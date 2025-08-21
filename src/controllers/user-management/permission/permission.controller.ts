@@ -6,7 +6,7 @@ import { bPermissions } from 'src/config/enums/user-management/permission.enum';
 
 @Controller('permission')
 export class PermissionController {
-  constructor(private permissionService: PermissionService) {}
+  constructor(private readonly permissionService: PermissionService) {}
 
   //!--> Get user permissions according to Module and Sections..............................|
   @Access(bPermissions.VIEW_PERMISSION_LIST)

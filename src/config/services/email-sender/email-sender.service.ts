@@ -4,7 +4,7 @@ import { EmailSenderInterface } from './email-sender.interface';
 
 @Injectable()
 export class EmailSenderService {
-  private transporter;
+  private readonly transporter;
 
   constructor() {
     this.transporter = nodemailer.createTransport({

@@ -9,7 +9,6 @@ import {
   ItemTestDocument,
 } from 'src/schemas/common/item-test.schema';
 import { Model } from 'mongoose';
-import { TablePaginationInterface } from 'src/config/services/table-pagination/table-pagination.interface';
 import { PaginationService } from 'src/config/services/table-pagination/table-pagination.service';
 
 @Injectable()
@@ -24,35 +23,6 @@ export class ItemService {
 
   //!--> Get Items with pagination......................................................................|
   async getItems(dto: FilterItemDto, pagination: PaginationStructure) {
-    // if (dto.ItemCode) {
-    //   const regex = new RegExp(dto.ItemCode, 'i');
-    //   dto.ItemCode = regex;
-    // }
-
-    // if (dto.ItemName) {
-    //   const regex = new RegExp(dto.ItemName, 'i');
-    //   dto.ItemName = regex;
-    // }
-
-    // // DB data filtering query
-    // const list = await this.itemTestModel
-    //   .find(dto)
-    //   .skip(pagination.offset)
-    //   .limit(pagination.limit)
-    //   .sort({ number: -1 });
-
-    // //Pass to get pagination
-    // const currentPage: TablePaginationInterface = {
-    //   data: list,
-    //   model: this.itemTestModel,
-    //   query: dto,
-    //   currentPage: pagination.page,
-    //   dataLimit: pagination.limit,
-    // };
-
-    // //-->
-    // return await this.paginationService.render_toPAGE(currentPage);
-
     let filterString = '';
     let counterString = '';
 

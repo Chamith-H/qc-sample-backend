@@ -23,7 +23,7 @@ import { bPermissions } from 'src/config/enums/user-management/permission.enum';
 
 @Controller('user')
 export class UserController {
-  constructor(private userService: UserService) {}
+  constructor(private readonly userService: UserService) {}
 
   //!--> Create new user.........................................................................|
   @Access(bPermissions.ADD_USER)

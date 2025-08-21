@@ -50,13 +50,8 @@ export class SapMasterService {
       (master: SapMaster) => master.name === 'UOM-Groups',
     );
 
-    const numberSequences = itemMasters.find(
-      (master: SapMaster) => master.name === 'Number-Sequence',
-    );
-
     const itemGroupsArr = itemGroups.data;
     const uomGroupsArr = uomGroups.data;
-    const numberSeqs = numberSequences.data;
 
     const selectedGroup = itemGroupsArr.find(
       (group) => group._id === dto.ItemsGroupCode,
@@ -66,8 +61,8 @@ export class SapMasterService {
       (group) => group._id === dto.UoMGroupEntry,
     );
 
-    dto.UoMGroupEntry = selectedUomGroup?.name || 'N/A';
-    dto.ItemsGroupCode = selectedGroup?.name || 'N/A';
+    dto.UoMGroupEntry = selectedUomGroup?.name ?? 'N/A';
+    dto.ItemsGroupCode = selectedGroup?.name ?? 'N/A';
     dto.ItemType = dto.ItemType.replace('it', '');
     dto.GLMethod = dto.GLMethod.replace(/.*_/, '');
     dto.CostAccountingMethod = dto.CostAccountingMethod.replace(/.*_/, '');
