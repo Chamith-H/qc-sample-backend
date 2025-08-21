@@ -190,6 +190,7 @@ export class UserService {
     // DB data filtering query
     const list = await this.userModel
       .find(dto)
+      .select('-password -resetOtp -type')
       .populate({ path: 'role' })
       .skip(pagination.offset)
       .limit(pagination.limit)
