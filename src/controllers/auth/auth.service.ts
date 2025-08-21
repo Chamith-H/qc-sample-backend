@@ -67,11 +67,6 @@ export class AuthService {
       throw new UnauthorizedException('Unauthorized access!');
     }
 
-    // Get AWS-S3 profile image
-    // const userProfileImage = await this.s3BucketService.getSingleFile(
-    //   validatedUser.profileImage,
-    // );
-
     // Create activated user object
     const activeUser: ActivatedUserDto = {
       userId: validatedUser._id,
