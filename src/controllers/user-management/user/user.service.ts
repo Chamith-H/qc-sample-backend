@@ -105,10 +105,22 @@ export class UserService {
     // Encrypt the password
     const encryptedPassword = await argon.hash(password);
 
+    // Initialize data structure for creating unique code
+    const uniqueCodeObject: UniqueCodeGeneratorInterface = {
+      dataModel: this.userModel,
+      prefix: 'USR-',
+    };
+
+    // Create new unique code
+    const uniqueCode =
+      await this.uniqueCodeGenetatorService.create_newUniqueCode(
+        uniqueCodeObject,
+      );
+
     // Assign email template
     const tempString = await this.emailTemplateService.register_userPassword(
       dto.name,
-      dto.employeeId,
+      uniqueCode.requestId,
       password,
     );
 
@@ -130,18 +142,6 @@ export class UserService {
         'Sorry, password cannot be sent to this office email!',
       );
     }
-
-    // Initialize data structure for creating unique code
-    const uniqueCodeObject: UniqueCodeGeneratorInterface = {
-      dataModel: this.userModel,
-      prefix: 'USR-',
-    };
-
-    // Create new unique code
-    const uniqueCode =
-      await this.uniqueCodeGenetatorService.create_newUniqueCode(
-        uniqueCodeObject,
-      );
 
     // Upload images to AWS S3 bucket
     const imageUrls = await this.s3BucketService.uploadFiles(
