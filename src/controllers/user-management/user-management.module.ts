@@ -18,7 +18,7 @@ import { EmailSenderService } from 'src/config/services/email-sender/email-sende
 import { UniqueCodeGeneratorService } from 'src/config/services/unique-code-generator/unique-code-generator.service';
 import { PaginationService } from 'src/config/services/table-pagination/table-pagination.service';
 import { CheckUniquenessService } from 'src/config/services/uniqueness-checker/uniqueness-checker.service';
-import { statusChangerService } from 'src/config/services/status-changer/status-changer.service';
+import { StatusChangerService } from 'src/config/services/status-changer/status-changer.service';
 import { AwsS3BucketService } from 'src/config/services/aws-s3-bucket/aws-s3-bucket.service';
 import { EmailTemplateService } from 'src/config/templates/email.template';
 
@@ -39,7 +39,7 @@ import { EmailTemplateService } from 'src/config/templates/email.template';
     EmailSenderService,
     UniqueCodeGeneratorService,
     CheckUniquenessService,
-    statusChangerService,
+    StatusChangerService,
     PaginationService,
     AwsS3BucketService,
     EmailSenderService,

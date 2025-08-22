@@ -1,7 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
 import { StatusChangerInterface } from './status-changer.interface';
 
-export class statusChangerService {
+export class StatusChangerService {
   async changeStatus(changeStatusModel: StatusChangerInterface) {
     // Identify current action
     let changingAction = null;

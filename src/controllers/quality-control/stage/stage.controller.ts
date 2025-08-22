@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
   HttpCode,
   Param,
   Post,
@@ -18,7 +17,7 @@ import { UpdateParameterDto } from './dto/update-parameter.dto';
 
 @Controller('stage')
 export class StageController {
-  constructor(private stageService: StageService) {}
+  constructor(private readonly stageService: StageService) {}
 
   //!--> Create item parameter
   @Post('create')

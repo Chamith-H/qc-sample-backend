@@ -11,11 +11,10 @@ import { User, UserDocument } from 'src/schemas/user-management/user.schema';
 import { Model } from 'mongoose';
 import * as generator from 'generate-password';
 import * as argon from 'argon2';
-import * as fs from 'fs';
 import { CheckUniquenessService } from 'src/config/services/uniqueness-checker/uniqueness-checker.service';
 import { UniqueCodeGeneratorService } from 'src/config/services/unique-code-generator/unique-code-generator.service';
 import { PaginationService } from 'src/config/services/table-pagination/table-pagination.service';
-import { statusChangerService } from 'src/config/services/status-changer/status-changer.service';
+import { StatusChangerService } from 'src/config/services/status-changer/status-changer.service';
 import { SystemLogService } from 'src/controllers/log-management/system-log/system-log.service';
 import { EditLogService } from 'src/controllers/log-management/edit-log/edit-log.service';
 import {
@@ -48,7 +47,7 @@ export class UserService {
     private readonly uniqueCodeGenetatorService: UniqueCodeGeneratorService,
     private readonly emailSenderService: EmailSenderService,
     private readonly paginationService: PaginationService,
-    private readonly statusChangerService: statusChangerService,
+    private readonly statusChangerService: StatusChangerService,
     private readonly s3BucketService: AwsS3BucketService,
     private readonly hiddenActionService: HiddenActionService,
 

@@ -1,6 +1,6 @@
-projectKey=syneris-qc
+projectKey=syneris-qc-v1.0.0
 serverUrl=http://localhost:9000
 serverVersion=25.8.0.112029
-dashboardUrl=http://localhost:9000/dashboard?id=syneris-qc
-ceTaskId=fe97bb41-2791-4abc-8c8d-5838c091ac71
-ceTaskUrl=http://localhost:9000/api/ce/task?id=fe97bb41-2791-4abc-8c8d-5838c091ac71
+dashboardUrl=http://localhost:9000/dashboard?id=syneris-qc-v1.0.0
+ceTaskId=bd282228-6f42-4215-b1db-48420a2c8111
+ceTaskUrl=http://localhost:9000/api/ce/task?id=bd282228-6f42-4215-b1db-48420a2c8111

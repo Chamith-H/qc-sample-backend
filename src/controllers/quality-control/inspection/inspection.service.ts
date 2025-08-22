@@ -118,66 +118,97 @@ export class InspectionService {
       throw new BadRequestException('No QC-parameters to quality checking!');
     }
 
-    let samples = [];
-    let sampleValues = [];
+    let samples: any[] = [];
+    let sampleValues: any[] = [];
 
     if (dto.method === 'Single-Test') {
-      const sampleCount = 1;
-
-      for (let i = 1; i <= Number(sampleCount); i++) {
-        samples.push({ name: `sample ${i}`, colValue: `sample_${i}` });
-        sampleValues.push({ [`sample_${i}`]: '' });
-      }
+      ({ samples, sampleValues } = this.handleSingleTest());
     } else if (dto.method === 'Multi-Test') {
-      if (dto.samplingMethod === 'Fixed') {
-        const givenSamples = dto.samplingLogics[0].count;
-        const sampleCount = Number(givenSamples);
-
-        for (let i = 1; i <= Number(sampleCount); i++) {
-          samples.push({ name: `sample ${i}`, colValue: `sample_${i}` });
-          sampleValues.push({ [`sample_${i}`]: '' });
-        }
-      } else if (dto.samplingMethod === 'Proportional') {
-        const quotationCount = Math.ceil(
-          Number(dto.quantity) / Number(dto.samplingLogics[0].max),
-        );
-
-        const givenSamples = dto.samplingLogics[0].count;
-        const sampleCount = Number(givenSamples);
-
-        const propotion = Number(dto.samplingLogics[0].max);
-
-        for (let j = 1; j <= quotationCount; j++) {
-          for (let i = 1; i <= Number(sampleCount); i++) {
-            samples.push({
-              name: `${j}${this.counterFetcher(j)} ${propotion} qty - Sample ${i}`,
-              colValue: `sample_${j}${i}`,
-            });
-            sampleValues.push({ [`sample_${j}${i}`]: '' });
-          }
-        }
-      } else if (dto.samplingMethod === 'Range') {
-        const filteredSamples = dto.samplingLogics.filter(
-          (s_logic: any) => Number(s_logic.min) < Number(dto.quantity),
-        );
-
-        for (let j = 0; j < filteredSamples.length; j++) {
-          for (let i = 1; i <= Number(filteredSamples[j].count); i++) {
-            samples.push({
-              name: `${filteredSamples[j].min} to ${filteredSamples[j].max} qty - Sample ${i}`,
-              colValue: `sample_${j}${i}`,
-            });
-            sampleValues.push({ [`sample_${j}${i}`]: '' });
-          }
-        }
-      }
+      ({ samples, sampleValues } = this.handleMultiTest(dto));
     }
 
     return {
-      samples: samples,
+      samples,
       values: itemParameters,
-      sampleValues: sampleValues,
+      sampleValues,
     };
+  }
+
+  /* ---------- helpers ---------- */
+  private handleSingleTest() {
+    const samples = [{ name: `sample 1`, colValue: `sample_1` }];
+    const sampleValues = [{ sample_1: '' }];
+    return { samples, sampleValues };
+  }
+
+  private handleMultiTest(dto: StartInspectionDto) {
+    switch (dto.samplingMethod) {
+      case 'Fixed':
+        return this.handleFixedSampling(dto);
+
+      case 'Proportional':
+        return this.handleProportionalSampling(dto);
+
+      case 'Range':
+        return this.handleRangeSampling(dto);
+
+      default:
+        return { samples: [], sampleValues: [] };
+    }
+  }
+
+  private handleFixedSampling(dto: StartInspectionDto) {
+    const count = Number(dto.samplingLogics[0].count);
+    const samples = [];
+    const sampleValues = [];
+
+    for (let i = 1; i <= count; i++) {
+      samples.push({ name: `sample ${i}`, colValue: `sample_${i}` });
+      sampleValues.push({ [`sample_${i}`]: '' });
+    }
+    return { samples, sampleValues };
+  }
+
+  private handleProportionalSampling(dto: StartInspectionDto) {
+    const quotationCount = Math.ceil(
+      Number(dto.quantity) / Number(dto.samplingLogics[0].max),
+    );
+    const count = Number(dto.samplingLogics[0].count);
+    const maxQty = Number(dto.samplingLogics[0].max);
+
+    const samples = [];
+    const sampleValues = [];
+
+    for (let j = 1; j <= quotationCount; j++) {
+      for (let i = 1; i <= count; i++) {
+        samples.push({
+          name: `${j}${this.counterFetcher(j)} ${maxQty} qty - Sample ${i}`,
+          colValue: `sample_${j}${i}`,
+        });
+        sampleValues.push({ [`sample_${j}${i}`]: '' });
+      }
+    }
+    return { samples, sampleValues };
+  }
+
+  private handleRangeSampling(dto: StartInspectionDto) {
+    const filtered = dto.samplingLogics.filter(
+      (logic: any) => Number(logic.min) < Number(dto.quantity),
+    );
+
+    const samples = [];
+    const sampleValues = [];
+
+    for (let j = 0; j < filtered.length; j++) {
+      for (let i = 1; i <= Number(filtered[j].count); i++) {
+        samples.push({
+          name: `${filtered[j].min} to ${filtered[j].max} qty - Sample ${i}`,
+          colValue: `sample_${j}${i}`,
+        });
+        sampleValues.push({ [`sample_${j}${i}`]: '' });
+      }
+    }
+    return { samples, sampleValues };
   }
 
   //!--> Get checking values

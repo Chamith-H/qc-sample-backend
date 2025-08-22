@@ -63,12 +63,6 @@ export class SapMasterService {
 
     dto.UoMGroupEntry = selectedUomGroup?.name ?? 'N/A';
     dto.ItemsGroupCode = selectedGroup?.name ?? 'N/A';
-    dto.ItemType = dto.ItemType.replace('it', '');
-    dto.GLMethod = dto.GLMethod.replace(/.*_/, '');
-    dto.CostAccountingMethod = dto.CostAccountingMethod.replace(/.*_/, '');
-    dto.PlanningSystem = dto.PlanningSystem.replace(/.*_/, '');
-    dto.ProcurementMethod = dto.ProcurementMethod.replace(/.*_/, '');
-    dto.IssueMethod = dto.IssueMethod.replace(/.*_/, '');
 
     return dto;
   }

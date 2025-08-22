@@ -29,7 +29,7 @@ import { EditLogOptions } from 'src/config/enums/log-management/edit-log.enum';
 import { DropdownStructure } from 'src/config/interfaces/drop-down.structure';
 import { UserType } from 'src/config/enums/user-management/user.enum';
 import { StatusChangerInterface } from 'src/config/services/status-changer/status-changer.interface';
-import { statusChangerService } from 'src/config/services/status-changer/status-changer.service';
+import { StatusChangerService } from 'src/config/services/status-changer/status-changer.service';
 import { UpdatePermissionDto } from './dto/update-permission.dto';
 
 @Injectable()
@@ -45,7 +45,7 @@ export class RoleService {
     private readonly checkUniquenessService: CheckUniquenessService,
     private readonly uniqueCodeGenetatorService: UniqueCodeGeneratorService,
     private readonly paginationService: PaginationService,
-    private readonly statusChangerService: statusChangerService,
+    private readonly statusChangerService: StatusChangerService,
     private readonly hiddenActionService: HiddenActionService,
 
     // Exportable services

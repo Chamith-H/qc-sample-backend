@@ -7,7 +7,7 @@ export const GetUser = createParamDecorator(
     const request = ctx.switchToHttp().getRequest();
     const token = request.headers['authorization'];
 
-    if (!token || !token.startsWith('Bearer ')) {
+    if (token?.startsWith('Bearer ')) {
       return null;
     }
 

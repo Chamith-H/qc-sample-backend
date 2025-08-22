@@ -16,6 +16,7 @@ export class UniqueCodeGeneratorService {
       const newRequestNumber = currentReq[0].maxNum + 1;
       return this.generate_NewId(newRequestNumber, uniqueCodeModel.prefix);
     } catch (error) {
+      console.error('Error generating new unique code:', error);
       const newRequestNumber = 1;
       return this.generate_NewId(newRequestNumber, uniqueCodeModel.prefix);
     }

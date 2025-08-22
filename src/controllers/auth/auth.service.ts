@@ -8,10 +8,9 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, UserDocument } from 'src/schemas/user-management/user.schema';
 import { JwtPayload } from './jwt/jwt.payload';
-import { loginDto } from './dto/login.dto';
+import { LoginDto } from './dto/login.dto';
 import * as generator from 'generate-password';
 import * as argon from 'argon2';
-import * as fs from 'fs';
 import { JwtService } from '@nestjs/jwt';
 import { ValidatedUserDto } from './dto/validated-user.dto';
 import { AwsS3BucketService } from 'src/config/services/aws-s3-bucket/aws-s3-bucket.service';
@@ -35,7 +34,7 @@ export class AuthService {
   ) {}
 
   //!--> User login to web............................................................|
-  async login(dto: loginDto) {
+  async login(dto: LoginDto) {
     // Get user according to username
     const user = await this.userModel.findOne({ userId: dto.username });
 

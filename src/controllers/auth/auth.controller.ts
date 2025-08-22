@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpCode, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Public } from 'src/config/decorators/public.decorator';
-import { loginDto } from './dto/login.dto';
+import { LoginDto } from './dto/login.dto';
 import { GetOtpDto } from './dto/get-otp.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 
@@ -13,7 +13,7 @@ export class AuthController {
   @Public()
   @HttpCode(200)
   @Post('login')
-  async login(@Body() dto: loginDto) {
+  async login(@Body() dto: LoginDto) {
     return await this.authService.login(dto);
   }
 
